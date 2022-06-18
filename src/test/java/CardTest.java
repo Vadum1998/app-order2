@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,8 +36,11 @@ public class CardTest {
         $x("//input[@name=\"phone\"]").val("+79012345678");
         $x("//span[@class=\"checkbox__box\"]").click();
         $x("//span[@class=\"button__text\"]").click();
-        $x("//*[contains(text(),\"Встреча успешно забронирована на \")]").should(visible, Duration.ofSeconds(15));
-        $(withText("Встреча успешно забронирована на")).should(visible);
+        $(".notification__content")
+                .shouldHave(Condition.text("Встреча успешно забронирована на " + dateOfMeet), Duration.ofSeconds(15))
+                .shouldBe(Condition.visible);
+        //$x("//*[contains(text(),\"Встреча успешно забронирована на \")]").should(visible, Duration.ofSeconds(15));
+        //$(withText("Встреча успешно забронирована на")).should(visible);
 
         //visable чтобы видели невидимый элемент
         //Duration.ofSeconds задержка
@@ -53,8 +57,10 @@ public class CardTest {
         $x("//input[@name=\"phone\"]").val("+79012345678");
         $x("//span[@class=\"checkbox__box\"]").click();
         $x("//span[@class=\"button__text\"]").click();
-        $x("//*[contains(text(),\"Встреча успешно забронирована на \")]").should(visible, Duration.ofSeconds(15));
-        $(withText("Встреча успешно забронирована на")).should(visible);
+        $(".notification__content")
+                .shouldHave(Condition.text("Встреча успешно забронирована на " + dateOfMeet), Duration.ofSeconds(15))
+                .shouldBe(Condition.visible);
+
     }
 
     @Test
